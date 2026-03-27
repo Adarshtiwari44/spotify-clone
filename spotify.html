@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify - Web Player</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Sidebar -->
+        <div class="sidebar">
+            <div class="logo">
+                <i class="fa-brands fa-spotify" style="color:#1db954"></i> Spotify
+            </div>
+            <div class="navigation">
+                <ul>
+                    <li><a href="#"><i class="fa-solid fa-house"></i> <span>Home</span></a></li>
+                    <li><a href="#"><i class="fa-solid fa-magnifying-glass"></i> <span>Search</span></a></li>
+                </ul>
+            </div>
+            <div class="library">
+                <div class="lib-options">
+                    <div class="lib-left">
+                        <i class="fa-solid fa-book"></i> Your Library
+                    </div>
+                    <div class="lib-icons">
+                        <i class="fa-solid fa-plus"></i>
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </div>
+                <div class="lib-boxes">
+                    <div class="box">
+                        <p class="box-p1">Create your first playlist</p>
+                        <p class="box-p2">It's easy, we'll help you</p>
+                        <button class="badge">Create playlist</button>
+                    </div>
+                    <div class="box">
+                        <p class="box-p1">Let's find some podcasts to follow</p>
+                        <p class="box-p2">We'll keep you updated on new episodes</p>
+                        <button class="badge">Browse podcasts</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <div class="sticky-nav">
+                <div class="sticky-nav-icons">
+                    <button class="nav-btn"><i class="fa-solid fa-chevron-left"></i></button>
+                    <button class="nav-btn"><i class="fa-solid fa-chevron-right"></i></button>
+                </div>
+                <div class="sticky-nav-options">
+                    <button class="badge nav-item hide">Explore Premium</button>
+                    <button class="badge nav-item dark-badge"><i class="fa-regular fa-circle-down" style="margin-right: 5px;"></i>Install App</button>
+                    <a href="/admin.html" class="admin-link"><i class="fa-solid fa-gear"></i> Admin</a>
+                    <i class="fa-regular fa-user nav-item user-icon"></i>
+                </div>
+            </div>
+
+            <div class="content-wrapper">
+                <h2>Popular Indian Tracks</h2>
+                <div class="cards-container" id="songs-container">
+                    <!-- Song cards will be injected here dynamically -->
+                     <div class="loading-text">Loading songs...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Music Player -->
+    <div class="music-player">
+        <div class="album">
+            <img src="https://via.placeholder.com/150" alt="Album Art" class="album-img" id="current-cover">
+            <div class="album-info">
+                <p class="album-title" id="current-title">--</p>
+                <p class="album-artist" id="current-artist">--</p>
+            </div>
+            <i class="fa-regular fa-heart album-icon"></i>
+        </div>
+        <div class="player">
+            <div class="player-controls">
+                <i class="fa-solid fa-shuffle player-control-icon disable" id="shuffle"></i>
+                <i class="fa-solid fa-backward-step player-control-icon" id="prev"></i>
+                <i class="fa-solid fa-circle-play player-control-icon main-play-btn" id="play-pause" style="opacity: 1; transform: scale(1.5);"></i>
+                <i class="fa-solid fa-forward-step player-control-icon" id="next"></i>
+                <i class="fa-solid fa-repeat player-control-icon disable" id="repeat"></i>
+            </div>
+            <div class="playback-bar">
+                <span class="curr-time" id="curr-time">0:00</span>
+                <input type="range" min="0" max="100" class="progress-bar" step="1" id="progress">
+                <span class="tot-time" id="tot-time">0:00</span>
+            </div>
+        </div>
+        <div class="controls">
+            <i class="fa-solid fa-microphone"></i>
+            <i class="fa-solid fa-bars"></i>
+            <i class="fa-solid fa-computer"></i>
+            <i class="fa-solid fa-volume-high"></i>
+            <input type="range" min="0" max="100" class="volume-bar" step="1" id="volume-control" value="100">
+        </div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

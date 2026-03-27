@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Spotify Admin Panel</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/7.0.1/css/all.min.css">
+    <link href="https://fonts.googleapis.com/css2?family=Circular+Std:wght@400;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            background-color: #121212;
+            color: white;
+            font-family: 'Circular Std', 'Montserrat', sans-serif;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .admin-container {
+            background-color: #181818;
+            padding: 40px;
+            border-radius: 8px;
+            width: 450px;
+            box-shadow: 0 4px 60px rgba(0,0,0,0.5);
+        }
+        h2 { margin-bottom: 20px; text-align: center; font-size: 24px; font-weight: 700; color: white; }
+        .form-group { margin-bottom: 20px; }
+        label { display: block; margin-bottom: 8px; font-size: 14px; font-weight: 700; color: #b3b3b3; }
+        input[type="text"], input[type="file"] {
+            width: 100%; padding: 12px; background-color: #333;
+            border: 1px solid transparent; border-radius: 4px;
+            color: white; font-size: 16px; outline: none; transition: 0.3s;
+        }
+        input[type="text"]:focus, input[type="file"]:focus { border: 1px solid #1db954; background-color: #444; }
+        button {
+            width: 100%; padding: 14px; background-color: #1db954;
+            color: black; border: none; border-radius: 40px; font-size: 16px;
+            font-weight: 700; cursor: pointer; transition: 0.2s; margin-top: 10px;
+        }
+        button:hover { background-color: #1ed760; transform: scale(1.04); }
+        .message { margin-top: 15px; text-align: center; font-size: 14px; display: none; }
+        .success { color: #1db954; }
+        .error { color: #e22134; }
+        .back-link { display: block; text-align: center; margin-top: 20px; color: #b3b3b3; text-decoration: none; font-size: 14px; transition: 0.2s; }
+        .back-link:hover { color: white; text-decoration: underline; }
+    </style>
+</head>
+<body>
+    <div class="admin-container">
+        <h2><i class="fa-brands fa-spotify" style="color:#1db954; margin-right:8px;"></i>Upload New Song</h2>
+        <form id="uploadForm">
+            <div class="form-group">
+                <label for="title">Song Title</label>
+                <input type="text" id="title" name="title" placeholder="Enter song title..." required>
+            </div>
+            <div class="form-group">
+                <label for="description">Artist / Description</label>
+                <input type="text" id="description" name="description" placeholder="Enter artist name..." required>
+            </div>
+            <div class="form-group">
+                <label for="audio">Audio File (MP3, WAV)</label>
+                <input type="file" id="audio" name="audio" accept="audio/*" required>
+            </div>
+            <div class="form-group">
+                <label for="image">Cover Artwork (JPG, PNG)</label>
+                <input type="file" id="image" name="image" accept="image/*" required>
+            </div>
+            <button type="submit" id="submitBtn">Upload to Spotify</button>
+            <div id="message" class="message"></div>
+        </form>
+        <a href="/" class="back-link">Back to Player</a>
+    </div>
+
+    <script>
+        document.getElementById('uploadForm').addEventListener('submit', async (e) => {
+            e.preventDefault();
+            const form = e.target;
+            const submitBtn = document.getElementById('submitBtn');
+            const messageEl = document.getElementById('message');
+            
+            submitBtn.textContent = 'Uploading...';
+            submitBtn.disabled = true;
+            messageEl.style.display = 'none';
+
+            const formData = new FormData(form);
+
+            try {
+                const response = await fetch('/api/songs', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                if (response.ok) {
+                    messageEl.textContent = 'Song uploaded successfully!';
+                    messageEl.className = 'message success';
+                    form.reset();
+                } else {
+                    const data = await response.json();
+                    messageEl.textContent = data.error || 'Failed to upload song.';
+                    messageEl.className = 'message error';
+                }
+            } catch (err) {
+                messageEl.textContent = 'Network error occurred.';
+                messageEl.className = 'message error';
+            } finally {
+                messageEl.style.display = 'block';
+                submitBtn.textContent = 'Upload to Spotify';
+                submitBtn.disabled = false;
+            }
+        });
+    </script>
+</body>
+</html>

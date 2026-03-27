@@ -1,0 +1,43 @@
+@import "tailwindcss";
+
+@theme {
+  --color-spotify-base: #000000;
+  --color-spotify-elevated: #121212;
+  --color-spotify-highlight: #1a1a1a;
+  --color-spotify-hover: #282828;
+  --color-spotify-accent: #1db954;
+  --color-spotify-accentHover: #1ed760;
+  --color-spotify-text: #b3b3b3;
+}
+
+body {
+  background-color: var(--color-spotify-base);
+  color: white;
+  overflow: hidden;
+}
+
+::selection {
+  background-color: var(--color-spotify-accent);
+  color: black;
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 10px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: #5a5a5a;
+  border-radius: 5px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #717171;
+}
+
+.glass-panel {
+  background: rgba(18, 18, 18, 0.7);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+}

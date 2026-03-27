@@ -1,0 +1,153 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Login</title>
+
+<style>
+
+*{
+margin:0;
+padding:0;
+box-sizing:border-box;
+font-family:Montserrat;
+}
+
+body{
+height:100vh;
+display:flex;
+justify-content:center;
+align-items:center;
+background:linear-gradient(135deg,#0f2027,#203a43,#2c5364);
+overflow:hidden;
+}
+
+.login-box{
+width:320px;
+padding:40px;
+background:rgba(0,0,0,0.6);
+border-radius:15px;
+backdrop-filter:blur(10px);
+box-shadow:0 0 30px rgba(0,0,0,0.5);
+animation:popup 0.6s ease;
+}
+
+@keyframes popup{
+from{
+transform:scale(0.6);
+opacity:0;
+}
+to{
+transform:scale(1);
+opacity:1;
+}
+}
+
+.login-box h2{
+color:white;
+text-align:center;
+margin-bottom:30px;
+}
+
+.input-box{
+position:relative;
+margin-bottom:25px;
+}
+
+.input-box input{
+width:100%;
+padding:10px;
+background:transparent;
+border:none;
+border-bottom:2px solid gray;
+outline:none;
+color:white;
+font-size:16px;
+transition:0.3s;
+}
+
+.input-box label{
+position:absolute;
+left:0;
+top:10px;
+color:gray;
+pointer-events:none;
+transition:0.3s;
+}
+
+.input-box input:focus{
+border-bottom:2px solid #1db954;
+}
+
+.input-box input:focus + label,
+.input-box input:valid + label{
+top:-12px;
+font-size:12px;
+color:#1db954;
+}
+
+button{
+width:100%;
+padding:12px;
+border:none;
+background:#1db954;
+border-radius:30px;
+font-size:16px;
+font-weight:bold;
+cursor:pointer;
+transition:0.3s;
+}
+
+button:hover{
+transform:scale(1.05);
+box-shadow:0 0 15px #1db954;
+}
+
+</style>
+</head>
+
+<body>
+
+<div class="login-box">
+
+<h2>Spotify Login</h2>
+
+<div class="input-box">
+<input id="user" required>
+<label>Username</label>
+</div>
+
+<div class="input-box">
+<input id="pass" type="password" required>
+<label>Password</label>
+</div>
+
+<button onclick="login()">Login</button>
+
+</div>
+
+<script>
+
+function login(){
+
+let u=document.getElementById("user").value;
+let p=document.getElementById("pass").value;
+
+if(u==="adarsh" && p==="1234"){
+
+document.body.innerHTML="<h1 style='color:white'>Loading...</h1>";
+
+setTimeout(()=>{
+window.location.href="spotify.html";
+},2000);
+
+}else{
+alert("Wrong Credentials");
+}
+
+}
+
+</script>
+
+</body>
+</html>

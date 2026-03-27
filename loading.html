@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>Loading</title>
+
+<style>
+
+body{
+background:black;
+display:flex;
+justify-content:center;
+align-items:center;
+height:100vh;
+}
+
+.loader{
+width:70px;
+height:70px;
+border:8px solid #333;
+border-top:8px solid #1db954;
+border-radius:50%;
+animation:spin 1s linear infinite;
+}
+
+@keyframes spin{
+100%{transform:rotate(360deg);}
+}
+
+</style>
+
+</head>
+
+<body>
+
+<div class="loader"></div>
+
+<script>
+
+setTimeout(function(){
+
+window.location.href="spotify.html";
+
+},3000);
+
+</script>
+
+</body>
+</html>
